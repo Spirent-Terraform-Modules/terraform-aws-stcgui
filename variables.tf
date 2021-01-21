@@ -48,12 +48,12 @@ variable "subnet_id" {
 }
 
 variable "ingress_cidr_blocks" {
-  description = "List of management interface ingress IPv4/IPv6 CIDR ranges"
+  description = "List of management interface ingress IPv4/IPv6 CIDR ranges."
   type        = list(string)
 }
 
 variable "key_name" {
-  description = "AWS SSH key name to assign to each instance"
+  description = "AWS SSH key name to assign to the instance."
   type        = string
 }
 
