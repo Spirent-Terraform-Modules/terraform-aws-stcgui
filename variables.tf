@@ -5,7 +5,7 @@ variable "ami" {
 }
 
 variable "vpc_id" {
-  description = "The AWS vpc id"
+  description = "AWS VPC ID"
   type        = string
   default     = ""
 }
@@ -29,17 +29,17 @@ variable "instance_type" {
 }
 
 variable "subnet_id" {
-  description = "Management public AWS subnet id"
+  description = "Management public AWS subnet ID"
   type        = string
 }
 
 variable "ingress_cidr_blocks" {
-  description = "List of management interface ingress IPv4/IPv6 CIDR ranges."
+  description = "List of management interface ingress IPv4/IPv6 CIDR ranges"
   type        = list(string)
 }
 
 variable "key_name" {
-  description = "AWS SSH key name to assign to the instance."
+  description = "AWS SSH key name to assign to each instance"
   type        = string
 }
 
@@ -55,12 +55,12 @@ variable "enable_provisioner" {
 }
 
 variable "src_dir" {
-  description = "Source directory containing 'Spirent TestCenter Application.exe'.  This directory will be copied to the new instance."
+  description = "Source directory containing 'Spirent TestCenter Application.exe'.  This directory will be copied to each instance."
   type        = string
 }
 
 variable "dest_dir" {
-  description = "Destination directory on the created instance where files will be copied to to."
+  description = "Destination directory on the instance where files will be copied"
   type        = string
   default     = "c:/users/administrator/downloads"
 }

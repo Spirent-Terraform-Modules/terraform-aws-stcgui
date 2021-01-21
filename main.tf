@@ -50,7 +50,7 @@ data "template_file" "user_data" {
   template = file("${path.module}/user_data.tpl")
 }
 
-# create Windows TestCenter 
+# create Windows TestCenter
 resource "aws_instance" "stc_gui" {
   count         = var.instance_count
   ami           = var.ami != "" ? var.ami : data.aws_ami.windows_server.id

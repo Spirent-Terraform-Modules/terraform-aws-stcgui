@@ -20,4 +20,3 @@ module "stc_gui" {
   private_key_file = "~/.ssh/stcv_dev_key.pem"
   src_dir          = "../../install-files"
 }
-
