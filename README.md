@@ -39,7 +39,7 @@ and place it in a directory with files copied to the instances.  Be sure to upda
 | private\_key\_file | AWS key private file | `string` | n/a | yes |
 | src\_dir | Source directory containing 'Spirent TestCenter Application.exe'.  This directory will be copied to each instance. | `string` | n/a | yes |
 | subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
-| vpc\_id | AWS VPC ID | `string` | `""` | no |
+| vpc\_id | AWS VPC ID | `string` | n/a | yes |
 
 ## Outputs
 
