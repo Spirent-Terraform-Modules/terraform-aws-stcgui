@@ -20,3 +20,7 @@ module "stc_gui" {
   private_key_file = "~/.ssh/stcv_dev_key.pem"
   stc_installer    = "../../install-files/Spirent TestCenter Application x64.exe"
 }
+
+output "instance_public_ips" {
+  value = module.stc_gui.instance_public_ips
+}
