@@ -18,5 +18,5 @@ module "stc_gui" {
 
   key_name         = "stcv_dev_key"
   private_key_file = "~/.ssh/stcv_dev_key.pem"
-  src_dir          = "../../install-files"
+  stc_installer    = "../../install-files/Spirent TestCenter Application x64.exe"
 }
