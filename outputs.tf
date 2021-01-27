@@ -1,7 +1,3 @@
-<<<<<<< 3f958f0e46ee2b589bbb7bf922479571036e609d
-<<<<<<< 426c4039dc78350a633785844bfb17d52b32484f
-=======
->>>>>>> chore: name and desc cleanup
 output "instance_ids" {
   description = "List of instance IDs"
   value       = aws_instance.stc_gui.*.id
