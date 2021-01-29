@@ -13,3 +13,9 @@ output "instance_private_ips" {
   value       = aws_instance.stc_gui.*.private_ip
 }
 
+output "instance_password_data" {
+  description = "List of instance password data.  This allows additional provisioners to rsadecrypt the password."
+  value       = aws_instance.stc_gui.*.password_data
+  sensitive   = true
+}
+

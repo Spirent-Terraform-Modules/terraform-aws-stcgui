@@ -94,14 +94,14 @@ resource "null_resource" "provisioner" {
 
   # copy Spirent TestCenter installer
   provisioner "file" {
-    source      = var.src_dir
-    destination = "${var.dest_dir}/install-files"
+    source      = var.stc_installer
+    destination = "${var.dest_dir}/${basename(var.stc_installer)}"
   }
 
   # run install
   provisioner "remote-exec" {
     inline = [
-      "powershell -File \"${var.dest_dir}/install-testcenter.ps1\" -dir \"${var.dest_dir}/install-files\" -download 1",
+      "powershell -File \"${var.dest_dir}/install-testcenter.ps1\" -Dir \"${var.dest_dir}\" -ExtraDownload 1",
     ]
   }
 }

@@ -1,5 +1,7 @@
 
-# Windows Spirent TestCenter Application
+# Windows Spirent TestCenter Application Terraform
+
+## Description
  
 Run a Windows Server instance and install the Windows Spirent TestCenter application.
 After the instance has been started connect using Remote Desktop to use Spirent TestCenter. 
@@ -37,7 +39,7 @@ and place it in a directory with files copied to the instances.  Be sure to upda
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
 | private\_key\_file | AWS key private file | `string` | n/a | yes |
-| src\_dir | Source directory containing 'Spirent TestCenter Application.exe'.  This directory will be copied to each instance. | `string` | n/a | yes |
+| stc\_installer | File path to 'Spirent TestCenter Application x64.exe' or 'Spirent TestCenter Application.exe' installer. | `string` | n/a | yes |
 | subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
 | vpc\_id | AWS VPC ID | `string` | n/a | yes |
 
@@ -46,8 +48,8 @@ and place it in a directory with files copied to the instances.  Be sure to upda
 | Name | Description |
 |------|-------------|
 | instance\_ids | List of instance IDs |
+| instance\_password\_data | List of instance password data.  This allows additional provisioners to rsadecrypt the password. |
 | instance\_private\_ips | List of private IP addresses assigned to the instances, if applicable |
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
