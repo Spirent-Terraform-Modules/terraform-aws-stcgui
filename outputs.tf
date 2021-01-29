@@ -18,4 +18,3 @@ output "instance_password_data" {
   value       = aws_instance.stc_gui.*.password_data
   sensitive   = true
 }
-
