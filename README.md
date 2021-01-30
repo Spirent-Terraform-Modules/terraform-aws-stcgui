@@ -32,6 +32,7 @@ Be sure to update the stc_installer variable to point to this file.
 |------|-------------|------|---------|:--------:|
 | ami | The base Windows Server AMI.  When not specified latests Windows Server 2019 AMI will be used. | `string` | `""` | no |
 | dest\_dir | Destination directory on the instance where files will be copied | `string` | `"c:/users/administrator/downloads"` | no |
+| eips | List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs. | `list(string)` | `[]` | no |
 | enable\_provisioner | Enable provisioning | `bool` | `true` | no |
 | ingress\_cidr\_blocks | List of management interface ingress IPv4/IPv6 CIDR ranges | `list(string)` | n/a | yes |
 | instance\_count | Number of instances to create | `number` | `1` | no |

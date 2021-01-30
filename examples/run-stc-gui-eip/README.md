@@ -1,6 +1,6 @@
-## Run Windows Spirent TestCenter Application
+## Run Windows Spirent TestCenter Application Using Elastic IPs
 
-Run a Windows Server 2019 instance and install the Spirent TestCenter Application.
+Run a Windows Server 2019 instance using elastic IPs and install the Spirent TestCenter Application.
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

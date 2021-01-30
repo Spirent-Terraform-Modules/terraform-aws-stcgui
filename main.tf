@@ -56,16 +56,30 @@ resource "aws_instance" "stc_gui" {
   ami           = var.ami != "" ? var.ami : data.aws_ami.windows_server.id
   instance_type = var.instance_type
   key_name      = var.key_name
-  subnet_id     = var.subnet_id
 
-  vpc_security_group_ids = [aws_security_group.stc_gui.id]
   user_data              = data.template_file.user_data.rendered
-
   get_password_data = true
+
+  network_interface {
+    network_interface_id = aws_network_interface.mgmt_plane[count.index].id
+    device_index = 0
+  }
 
   tags = {
     Name = format("%s%d", var.instance_name, 1 + count.index)
   }
+}
+
+resource "aws_network_interface" "mgmt_plane" {
+  count     = var.instance_count
+  subnet_id = var.subnet_id
+  security_groups = [aws_security_group.stc_gui.id]
+}
+
+resource "aws_eip_association" "public_ip" {
+  count                = length(var.eips)
+  network_interface_id   =  aws_network_interface.mgmt_plane[count.index].id
+  allocation_id        = var.eips[count.index]
 }
 
 # provison the windows VM
