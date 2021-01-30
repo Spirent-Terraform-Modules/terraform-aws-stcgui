@@ -47,6 +47,12 @@ variable "subnet_id" {
   }
 }
 
+variable "eips" {
+  description = "List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs."
+  type        = list(string)
+  default     = []
+}
+
 variable "ingress_cidr_blocks" {
   description = "List of management interface ingress IPv4/IPv6 CIDR ranges"
   type        = list(string)
