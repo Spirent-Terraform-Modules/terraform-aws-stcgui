@@ -57,12 +57,12 @@ resource "aws_instance" "stc_gui" {
   instance_type = var.instance_type
   key_name      = var.key_name
 
-  user_data              = data.template_file.user_data.rendered
+  user_data         = data.template_file.user_data.rendered
   get_password_data = true
 
   network_interface {
     network_interface_id = aws_network_interface.mgmt_plane[count.index].id
-    device_index = 0
+    device_index         = 0
   }
 
   tags = {
@@ -71,14 +71,14 @@ resource "aws_instance" "stc_gui" {
 }
 
 resource "aws_network_interface" "mgmt_plane" {
-  count     = var.instance_count
-  subnet_id = var.subnet_id
+  count           = var.instance_count
+  subnet_id       = var.subnet_id
   security_groups = [aws_security_group.stc_gui.id]
 }
 
 resource "aws_eip_association" "public_ip" {
   count                = length(var.eips)
-  network_interface_id   =  aws_network_interface.mgmt_plane[count.index].id
+  network_interface_id = aws_network_interface.mgmt_plane[count.index].id
   allocation_id        = var.eips[count.index]
 }
 
