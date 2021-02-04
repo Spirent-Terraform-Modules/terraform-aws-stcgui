@@ -1,1 +1,0 @@
-../../../tfvars/aws-stc-gui/mysubs.auto.tfvars
