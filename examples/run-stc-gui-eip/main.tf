@@ -13,8 +13,14 @@ variable "subnet_id" {
   default     = "subnet-123456789"
 }
 
+variable "instance_count" {
+  description = "Number of instances to create"
+  type        = number
+  default     = 1
+}
+
 variable "key_name" {
-  description = "AWS SSH key name to assign to the instance"
+  description = "AWS SSH key name to assign to each instance"
   default     = "bootstrap_key"
 }
 
@@ -28,9 +34,9 @@ variable "stc_installer" {
   default     = "../../Spirent TestCenter Application x64.exe"
 }
 
-variable "eip_id" {
-  description = "Instance Elastic IP ID"
-  default     = "eipalloc-123456789"
+variable "eips" {
+  description = "List of instance Elastic IP IDs"
+  default     = ["eipalloc-123456789"]
 }
 
 
@@ -41,7 +47,7 @@ module "stc_gui" {
   instance_count = 1
 
   subnet_id = var.subnet_id
-  eips      = [var.eip_id]
+  eips      = var.eips
 
   # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
@@ -52,5 +58,6 @@ module "stc_gui" {
 }
 
 output "instance_public_ips" {
-  value = module.stc_gui.instance_public_ips
+  description = "List of public IP addresses assigned to the instances, if applicable"
+  value       = module.stc_gui.instance_public_ips
 }

@@ -16,8 +16,9 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| eip\_id | Instance Elastic IP ID | `string` | `"eipalloc-123456789"` | no |
-| key\_name | AWS SSH key name to assign to the instance | `string` | `"bootstrap_key"` | no |
+| eips | List of instance Elastic IP IDs | `list` | <pre>[<br>  "eipalloc-123456789"<br>]</pre> | no |
+| instance\_count | Number of instances to create | `number` | `1` | no |
+| key\_name | AWS SSH key name to assign to each instance | `string` | `"bootstrap_key"` | no |
 | private\_key\_file | AWS key private file | `string` | `"bootstrap_private_key_file"` | no |
 | region | AWS region | `string` | `"us-west-2"` | no |
 | stc\_installer | File path to 'Spirent TestCenter Application x64.exe' or 'Spirent TestCenter Application.exe' installer. | `string` | `"../../Spirent TestCenter Application x64.exe"` | no |
@@ -28,6 +29,6 @@ No provider.
 
 | Name | Description |
 |------|-------------|
-| instance\_public\_ips | n/a |
+| instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
