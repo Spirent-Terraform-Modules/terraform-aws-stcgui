@@ -2,9 +2,9 @@
 # Windows Spirent TestCenter Application Terraform
 
 ## Description
- 
+
 Run a Windows Server instance and install the Windows Spirent TestCenter application.
-After the instance has been started connect using Remote Desktop to use Spirent TestCenter. 
+After the instance has been started connect using Remote Desktop to use Spirent TestCenter.
 
 Please obtain a copy of the Windows Spirent TestCenter Application from http://support.spirent.com.
 Be sure to update the stc_installer variable to point to this file.

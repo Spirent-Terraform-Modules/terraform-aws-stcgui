@@ -55,6 +55,6 @@ Invoke-Installer -FilePath "$Dir/$stc_installer" -ArgumentList "/silent /pgpassw
 # Install extra downloads
 if ( $ExtraDownloads )
 {
-        Invoke-Download -FilePath "$Dir/Wireshark.exe" -Url "https://2.na.dl.wireshark.org/win64/Wireshark-win64-3.4.2.exe"
+        Invoke-Download -FilePath "$Dir/Wireshark.exe" -Url "https://2.na.dl.wireshark.org/win64/all-versions/Wireshark-win64-3.4.2.exe"
         Invoke-Installer -FilePath "$Dir/Wireshark.exe" -ArgumentList "/S"
 }

@@ -1,26 +1,62 @@
+
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
-
-data "aws_vpc" "default" {
-  default = true
+variable "region" {
+  description = "AWS region"
+  default     = "us-west-2"
 }
+
+variable "vpc_id" {
+  description = "VPC ID"
+  default     = "vpc-123456789"
+}
+
+variable "subnet_id" {
+  description = "Management plane subnet ID"
+  default     = "subnet-123456789"
+}
+
+variable "instance_count" {
+  description = "Number of instances to create"
+  type        = number
+  default     = 1
+}
+
+variable "key_name" {
+  description = "AWS SSH key name to assign to each instance"
+  default     = "bootstrap_key"
+}
+
+variable "private_key_file" {
+  description = "AWS key private file"
+  default     = "bootstrap_private_key_file"
+}
+
+variable "stc_installer" {
+  description = "File path to 'Spirent TestCenter Application x64.exe' or 'Spirent TestCenter Application.exe' installer."
+  default     = "../../Spirent TestCenter Application x64.exe"
+}
+
 
 module "stc_gui" {
   source = "../.."
 
-  vpc_id         = data.aws_vpc.default.id
-  instance_count = 1
+  vpc_id         = var.vpc_id
+  instance_count = var.instance_count
 
-  subnet_id           = "subnet-ffe75cb2"
+  subnet_id = var.subnet_id
+
+  # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  key_name         = "stcv_dev_key"
-  private_key_file = "~/.ssh/stcv_dev_key.pem"
-  stc_installer    = "../../install-files/Spirent TestCenter Application x64.exe"
+  key_name         = var.key_name
+  private_key_file = var.private_key_file
+  stc_installer    = var.stc_installer
 }
 
 output "instance_public_ips" {
-  value = module.stc_gui.instance_public_ips
+  description = "List of public IP addresses assigned to the instances, if applicable"
+  value       = module.stc_gui.instance_public_ips
 }
