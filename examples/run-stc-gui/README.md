@@ -12,6 +12,10 @@ To run this example you need to execute:
 
 This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
 
+The `terraform apply` will take approximately 30 minutes to complete in order to provision the Windows Server instance.
+
+[Connect](../../README.md#connect-to-windows-server) to the Windows Server instance via Remote Desktop and launch the Spirent TestCenter Application.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

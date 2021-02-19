@@ -13,6 +13,21 @@ traffic generator instances can be created via Terraform.
 - Obtain a copy of the Windows Spirent TestCenter Application from http://support.spirent.com.
 Be sure to update the `stc_installer` variable to point to this file.
 
+## Connect to Windows Server
+
+After the Windows Server instance is running, you can connect to it over Remote Desktop (RDP).
+
+1. Find the Windows Server instance you provisioned in the AWS dashboard.
+2. Select the instance and click _Connect_.
+3. Select the _RDP Client_ tab and download the remote desktop file.
+4. Click _Get password_ and upload the private key you specified in your Terraform script (i.e. `private_key_file`).
+5. Click _Decrypt password_ and copy the auto-generated password.  This will be the password required to login to the Windows Server.
+6. Locate and launch the RDP file you downloaded in step 3.
+7. Click _Connect_ and provide the password from step 5.  The username is `Administrator`.
+8. You may receive a security warning about an insecure certificate due to the instance using a self-signed certificate.  Click _Yes_ to continue.
+9. You should now see the Windows desktop with a shortcut to the Spirent TestCenter Application.
+10. Launch the Spirent TestCenter Application.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
