@@ -1,5 +1,5 @@
 variable "ami" {
-  description = "The base Windows Server AMI.  When not specified latests Windows Server 2019 AMI will be used."
+  description = "The base Windows Server AMI.  When not specified latest Windows Server 2019 AMI will be used."
   type        = string
   default     = ""
 
@@ -84,7 +84,6 @@ variable "stc_installer" {
     )
     error_message = "Spirent TestCenter Application x64.exe or Spirent TestCenter Application.exe must be specified in the path."
   }
-
 }
 
 variable "dest_dir" {

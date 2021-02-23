@@ -2,6 +2,19 @@
 
 Run a Windows Server 2019 instance using elastic IPs and install the Spirent TestCenter Application.
 
+## Usage
+
+To run this example you need to execute:
+
+    $ terraform init
+    $ terraform plan
+    $ terraform apply
+
+This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
+
+The `terraform apply` will take approximately 30 minutes to complete in order to provision the Windows Server instance.
+
+[Connect](../../README.md#connect-to-windows-server) to the Windows Server instance via Remote Desktop and launch the Spirent TestCenter Application.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -11,6 +24,16 @@ No requirements.
 ## Providers
 
 No provider.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| stc_gui | ../.. |  |
+
+## Resources
+
+No resources.
 
 ## Inputs
 
@@ -30,5 +53,4 @@ No provider.
 | Name | Description |
 |------|-------------|
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
