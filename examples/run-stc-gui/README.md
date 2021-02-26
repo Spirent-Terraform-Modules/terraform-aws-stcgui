@@ -40,6 +40,7 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | instance\_count | Number of instances to create | `number` | `1` | no |
+| instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | `"bootstrap_key"` | no |
 | private\_key\_file | AWS key private file | `string` | `"bootstrap_private_key_file"` | no |
 | region | AWS region | `string` | `"us-west-2"` | no |
