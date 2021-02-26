@@ -77,7 +77,7 @@ No Modules.
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
 | private\_key\_file | AWS key private file | `string` | n/a | yes |
 | root\_block\_device | Customize details about the root block device of the instance. See Block Devices below for details. | `list(map(string))` | `[]` | no |
-| security\_group\_ids | List of management plane security group IDs.  Leave empty to create a default security group using ingress\_cidir\_blocks. | `list(string)` | `[]` | no |
+| security\_group\_ids | List of management plane security group IDs.  Leave empty to create a default security group using ingress\_cidr\_blocks. | `list(string)` | `[]` | no |
 | stc\_installer | File path to 'Spirent TestCenter Application x64.exe' or 'Spirent TestCenter Application.exe' installer. | `string` | n/a | yes |
 | subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
 | vpc\_id | AWS VPC ID | `string` | n/a | yes |
