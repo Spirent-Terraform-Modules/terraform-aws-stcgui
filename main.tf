@@ -17,7 +17,8 @@ data "aws_ami" "windows_server" {
 }
 
 resource "aws_security_group" "stc_gui" {
-  name        = "stc_gui"
+  count       = length(var.security_group_ids) > 0 ? 0 : 1
+  name        = "stc-gui-${random_id.uid.id}"
   description = "TestCenter Security Group"
 
   vpc_id = var.vpc_id
@@ -50,6 +51,10 @@ data "template_file" "user_data" {
   template = file("${path.module}/user_data.tpl")
 }
 
+resource "random_id" "uid" {
+  byte_length = 8
+}
+
 # create Windows TestCenter
 resource "aws_instance" "stc_gui" {
   count         = var.instance_count
@@ -59,6 +64,19 @@ resource "aws_instance" "stc_gui" {
 
   user_data         = data.template_file.user_data.rendered
   get_password_data = true
+
+  dynamic "root_block_device" {
+    for_each = length(var.root_block_device) > 0 ? var.root_block_device : [{}]
+    content {
+      delete_on_termination = lookup(root_block_device.value, "delete_on_termination", true)
+      encrypted             = lookup(root_block_device.value, "encrypted", null)
+      iops                  = lookup(root_block_device.value, "iops", null)
+      kms_key_id            = lookup(root_block_device.value, "kms_key_id", null)
+      volume_size           = lookup(root_block_device.value, "volume_size", null)
+      volume_type           = lookup(root_block_device.value, "volume_type", null)
+    }
+  }
+
 
   network_interface {
     network_interface_id = aws_network_interface.mgmt_plane[count.index].id
@@ -73,7 +91,7 @@ resource "aws_instance" "stc_gui" {
 resource "aws_network_interface" "mgmt_plane" {
   count           = var.instance_count
   subnet_id       = var.subnet_id
-  security_groups = [aws_security_group.stc_gui.id]
+  security_groups = length(var.security_group_ids) > 0 ? var.security_group_ids : [aws_security_group.stc_gui[0].id]
 }
 
 resource "aws_eip_association" "public_ip" {

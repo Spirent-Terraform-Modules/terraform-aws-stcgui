@@ -1,4 +1,4 @@
-# Windows Spirent TestCenter Application Terraform
+# AWS Windows Spirent TestCenter Application Terraform
 
 ## Description
 
@@ -42,6 +42,7 @@ After the Windows Server instance is running, you can connect to it over Remote 
 |------|---------|
 | aws | >= 2.65 |
 | null | n/a |
+| random | n/a |
 | template | n/a |
 
 ## Modules
@@ -52,12 +53,13 @@ No Modules.
 
 | Name |
 |------|
-| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/2.65/docs/data-sources/ami) |
-| [aws_eip_association](https://registry.terraform.io/providers/hashicorp/aws/2.65/docs/resources/eip_association) |
-| [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/2.65/docs/resources/instance) |
-| [aws_network_interface](https://registry.terraform.io/providers/hashicorp/aws/2.65/docs/resources/network_interface) |
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.65/docs/resources/security_group) |
+| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) |
+| [aws_eip_association](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip_association) |
+| [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) |
+| [aws_network_interface](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface) |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) |
 | [null_resource](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) |
+| [random_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) |
 | [template_file](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) |
 
 ## Inputs
@@ -68,12 +70,14 @@ No Modules.
 | dest\_dir | Destination directory on the instance where files will be copied | `string` | `"c:/users/administrator/downloads"` | no |
 | eips | List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs. | `list(string)` | `[]` | no |
 | enable\_provisioner | Enable provisioning | `bool` | `true` | no |
-| ingress\_cidr\_blocks | List of management interface ingress IPv4/IPv6 CIDR ranges | `list(string)` | n/a | yes |
+| ingress\_cidr\_blocks | List of management interface ingress IPv4/IPv6 CIDR ranges.  Set to empty list when using security\_group\_ids. | `list(string)` | n/a | yes |
 | instance\_count | Number of instances to create | `number` | `1` | no |
 | instance\_name | Name assigned to the Windows STC GUI instance.  An instance number will be appended to the name. | `string` | `"stcgui-"` | no |
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
 | private\_key\_file | AWS key private file | `string` | n/a | yes |
+| root\_block\_device | Customize details about the root block device of the instance. See Block Devices below for details. | `list(map(string))` | `[]` | no |
+| security\_group\_ids | List of management plane security group IDs.  Leave empty to create a default security group using ingress\_cidir\_blocks. | `list(string)` | `[]` | no |
 | stc\_installer | File path to 'Spirent TestCenter Application x64.exe' or 'Spirent TestCenter Application.exe' installer. | `string` | n/a | yes |
 | subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
 | vpc\_id | AWS VPC ID | `string` | n/a | yes |
@@ -87,3 +91,19 @@ No Modules.
 | instance\_private\_ips | List of private IP addresses assigned to the instances, if applicable |
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Block Devices
+
+### Root Block Device
+The root_block_device mapping supports the following:
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| delete_on_termination | Whether the volume should be destroyed on instance termination. | `string` | `true` | no |
+| encrypted | Whether to enable volume encryption. Must be configured to perform drift detection. | `bool` | `false` | no |
+| iops | Amount of provisioned IOPS. Only valid for volume_type of `io1`, `io2` or `gp3`. | `number` | n/a | no |
+| kms_key_id | Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection. | `string` | n/a | no |
+| tags | A map of tags to assign to the device. | `map(string)` | `{}` | no |
+| throughput | Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of `gp3`. | `number` | n/a | no |
+| volume_size | Size of the volume in gibibytes (GiB). | `number` | n/a | no |
+| volume_type | Type of volume. Valid values include `standard`, `gp2`, `gp3`, `io1`, `io2`, `sc1`, or `st1`. | `string` | `gp2` | no |

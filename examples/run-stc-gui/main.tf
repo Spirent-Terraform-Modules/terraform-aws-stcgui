@@ -24,6 +24,12 @@ variable "instance_count" {
   default     = 1
 }
 
+variable "instance_type" {
+  description = "AWS instance type"
+  type        = string
+  default     = "m5.large"
+}
+
 variable "key_name" {
   description = "AWS SSH key name to assign to each instance"
   default     = "bootstrap_key"
@@ -45,6 +51,7 @@ module "stc_gui" {
 
   vpc_id         = var.vpc_id
   instance_count = var.instance_count
+  instance_type  = var.instance_type
 
   subnet_id = var.subnet_id
 
